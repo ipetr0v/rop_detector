@@ -4,7 +4,6 @@ DEST = /lib/modules/$(CURRENT)/misc
 PWD = $(shell pwd)
 MODULE = rop
 PROGRAM = rop_detector
-JUNK = junk
 
 BIN = $(PWD)/bin
 SRC = $(PWD)/src
@@ -308,9 +307,6 @@ default:
 	gcc -shared -o libinject_fork.so inject_fork.o shared_memory_wrapper.o -ldl
 	mv libinject_fork.so $(BIN)
 	rm inject_fork.o
-	
-	gcc $(JUNK-SRC) -o $(JUNK) -g
-	mv $(JUNK) $(BIN)
 
 clean:
 	@rm -f $(BIN)/$(MODULE).ko
