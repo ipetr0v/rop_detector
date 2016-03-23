@@ -26,8 +26,8 @@ make
 
 Usage
 -------------
-sudo insmod ./bin/rop.ko # kernel module installation
-sudo ./bin/rop_detector -p process_pid -i eth0 # detect ROP-shellcodes for the analyzed process from eth0 interface
+* sudo insmod ./bin/rop.ko # kernel module installation
+* sudo ./bin/rop_detector -p process_pid -i eth0 # detect ROP-shellcodes for the analyzed process from eth0 interface
 
 Third party libraries used
 -------------
