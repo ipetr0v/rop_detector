@@ -1,0 +1,214 @@
+/*
+ * hotpatch is a dll injection strategy.
+ * Copyright (c) 2010-2011, Vikas Naresh Kumar, Selective Intellect LLC
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * * Redistributions of source code must retain the above copyright
+ *   notice, this list of conditions and the following disclaimer.
+ *
+ * * Redistributions in binary form must reproduce the above copyright
+ *	 notice, this list of conditions and the following disclaimer in the
+ *	 documentation and/or other materials provided with the distribution.
+ *
+ * * Neither the name of Selective Intellect LLC nor the
+ *   names of its contributors may be used to endorse or promote products
+ *   derived from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY
+ * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+#ifndef __LIBHOTPATCH_CONFIG_H__
+#define __LIBHOTPATCH_CONFIG_H__
+
+#if (defined __GNUC__ && !defined _GNU_SOURCE)
+    #define _GNU_SOURCE 1
+#endif
+
+#define HOTPATCH_HAS_FEATURES_H
+#ifdef HOTPATCH_HAS_FEATURES_H
+    #include <features.h>
+#endif
+
+#define HOTPATCH_HAS_ERRNO_H
+#ifdef HOTPATCH_HAS_ERRNO_H
+	#include <errno.h>
+#endif
+
+#define HOTPATCH_HAS_STDIO_H
+#ifdef HOTPATCH_HAS_STDIO_H
+	#include <stdio.h>
+#endif
+
+#define HOTPATCH_HAS_STDLIB_H
+#ifdef HOTPATCH_HAS_STDLIB_H
+	#include <stdlib.h>
+#endif
+
+#define HOTPATCH_HAS_STRING_H
+#ifdef HOTPATCH_HAS_STRING_H
+	#include <string.h>
+#endif
+
+#define HOTPATCH_HAS_STRNLEN_FN
+#ifndef HOTPATCH_HAS_STRNLEN_FN
+    size_t hotpatch_strnlen(const char *str, size_t maxlen);
+    #define strnlen(a,b) hotpatch_strnlen(a,b)
+#endif
+
+#define HOTPATCH_HAS_STRTOKR_FN
+#ifndef HOTPATCH_HAS_STRTOKR_FN
+	#define strtok_r(a,b,c) strtok(a,b)
+#endif
+
+#define HOTPATCH_HAS_STDDEF_H
+#ifdef HOTPATCH_HAS_STDDEF_H
+	#include <stddef.h>
+#endif
+
+#define HOTPATCH_HAS_LIMITS_H
+#ifdef HOTPATCH_HAS_LIMITS_H
+	#include <limits.h>
+#endif
+
+#define HOTPATCH_HAS_STDINT_H
+#ifdef HOTPATCH_HAS_STDINT_H
+	#include <stdint.h>
+#endif
+
+#define HOTPATCH_HAS_STDARG_H
+#ifdef HOTPATCH_HAS_STDARG_H
+	#include <stdarg.h>
+#endif
+
+#define HOTPATCH_HAS_STDBOOL_H
+#ifdef HOTPATCH_HAS_STDBOOL_H
+	#include <stdbool.h>
+#endif
+
+#define HOTPATCH_HAS_TIME_H
+#ifdef HOTPATCH_HAS_TIME_H
+	#include <time.h>
+#endif
+
+#define HOTPATCH_HAS_SYS_TIME_H
+#ifdef HOTPATCH_HAS_SYS_TIME_H
+	#include <sys/time.h>
+#endif
+
+#define HOTPATCH_HAS_SYS_TYPES_H
+#ifdef HOTPATCH_HAS_SYS_TYPES_H
+	#include <sys/types.h>
+#else
+	#ifndef __cplusplus
+		typedef enum {
+			false = 0,
+			true = 1
+		} bool;
+	#endif
+#endif
+
+#define HOTPATCH_HAS_UNISTD_H
+#ifdef HOTPATCH_HAS_UNISTD_H
+	#include <unistd.h>
+#endif
+
+#define HOTPATCH_HAS_ASSERT_H
+
+/* for the APPLE */
+/* #undef HOTPATCH_HAS_MACH_MESSAGE_H */
+/* #undef HOTPATCH_HAS_MACH_MACH_H */
+/* #undef HOTPATCH_HAS_MACH_TASK_H */
+/* #undef HOTPATCH_HAS_MACH_MACHTRAPS_H */
+/* #undef HOTPATCH_HAS_MACH_MACHERROR_H */
+/* #undef HOTPATCH_HAS_MACH_TASKFORPID_FN */
+
+/* for the Linux */
+#define HOTPATCH_HAS_LINUX_ELF_H
+#ifdef HOTPATCH_HAS_LINUX_ELF_H
+	#include <elf.h>
+#endif
+
+#define HOTPATCH_HAS_LINUX_DLFCN_H
+#ifdef HOTPATCH_HAS_LINUX_DLFCN_H
+	#include <dlfcn.h>
+#endif
+
+#define HOTPATCH_HAS_LINUX_LINK_H
+#ifdef HOTPATCH_HAS_LINUX_LINK_H
+	#include <link.h>
+#endif
+
+#define HOTPATCH_HAS_LINUX_PTHREAD_H
+#ifdef HOTPATCH_HAS_LINUX_PTHREAD_H
+	#include <pthread.h>
+#endif
+
+#define HOTPATCH_HAS_LINUX_SETJMP_H
+#ifdef HOTPATCH_HAS_LINUX_SETJMP_H
+	#include <setjmp.h>
+#endif
+
+#define HOTPATCH_HAS_LINUX_SIGNAL_H
+#ifdef HOTPATCH_HAS_LINUX_SIGNAL_H
+	#include <signal.h>
+#endif
+
+#define HOTPATCH_HAS_LINUX_SYS_PTRACE_H
+#ifdef HOTPATCH_HAS_LINUX_SYS_PTRACE_H
+	#include <sys/ptrace.h>
+#endif
+
+#define HOTPATCH_HAS_LINUX_SYS_WAIT_H
+#ifdef HOTPATCH_HAS_LINUX_SYS_WAIT_H
+	#include <sys/wait.h>
+#endif
+
+#define HOTPATCH_HAS_LINUX_SYS_STAT_H
+#ifdef HOTPATCH_HAS_LINUX_SYS_STAT_H
+	#include <sys/stat.h>
+#endif
+
+#define HOTPATCH_HAS_LINUX_FCNTL_H
+#ifdef HOTPATCH_HAS_LINUX_FCNTL_H
+	#include <fcntl.h>
+#endif
+
+#define HOTPATCH_HAS_LINUX_SYS_USER_H
+#ifdef HOTPATCH_HAS_LINUX_SYS_USER_H
+	#include <sys/types.h>
+	#include <sys/user.h>
+#endif
+
+#define HOTPATCH_HAS_LINUX_SYS_SYSCALL_H
+#ifdef HOTPATCH_HAS_LINUX_SYS_SYSCALL_H
+	#include <sys/syscall.h>
+#endif
+
+#define HOTPATCH_HAS_LINUX_DLITERPHDR_FN
+
+#define HOTPATCH_VOIDPTR_SIZE 4
+
+/* #undef HOTPATCH_USE_ASM */
+
+#if __WORDSIZE == 64
+	#define LX "%lx"
+	#define LU "%lu"
+#else
+	#define LX "%x"
+	#define LU "%u"
+#endif
+
+#endif /* __LIBHOTPATCH_CONFIG_H__ */
+
